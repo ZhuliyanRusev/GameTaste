@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}">
+</head>
+<body>
+<header th:replace="~{commons/fragments::nav}"></header>
+<main>
+    <form class="mx-auto w-25 bg-blur" method="POST" action="/users/register" th:object="${userRegisterBindingModel}">
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-info">Register</span></h1>
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="username" class="h4 mb-2 text-white">Username</label>
+            </div>
+            <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" id="username"
+                   name="username"/>
+            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Username error
+                message</small>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="firstName" class="h4 mb-2 text-white">First name</label>
+            </div>
+            <input th:field="*{firstName}" th:errorclass="bg-danger" type="text" class="form-control" id="firstName"
+                   name="firstName"/>
+            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger">First name
+                error message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder textCol d-flex justify-content-center">
+                <label for="lastName" class="h4 mb-2 text-white">Last name</label>
+            </div>
+            <input th:field="*{lastName}" th:errorclass="bg-danger" type="text" class="form-control" id="lastName"
+                   name="lastName"/>
+            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger">Last name error
+                message</small>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="email" class="h4 mb-2">Email</label>
+            </div>
+            <input th:field="*{email}" th:errorclass="bg-danger" type="email" class="form-control" id="email"
+                   name="email"/>
+            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger">Email error
+                message</small>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="password" class="h4 mb-2">Password</label>
+            </div>
+            <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password"
+                   name="password"/>
+            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger">Password error
+                message</small>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+            </div>
+            <input th:field="*{confirmPassword}" th:errorclass="bg-danger" type="password" class="form-control"
+                   id="confirmPassword" name="confirmPassword"/>
+            <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="text-danger">Password
+                error message</small>
+        </div>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-light mb-3 bg-info" value="Register">Register</button>
+        </div>
+
+    </form>
+</main>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}"></head>
+<body class="all-games-body">
+<header th:replace="~{commons/fragments::nav}"></header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-3 mb-4" th:each="g: ${allGames}" th:object="${g}">
+            <div class="all-items-card">
+                <img th:src="*{imageUrl}" class="card-img-all-items" alt="Game Image">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="*{gameName}"></h5>
+                    <p class="card-text" th:text="|Category: *{category}|"></p>
+                    <p class="card-text" th:text="|Release date: *{releaseDate}|"></p>
+                    <p class="card-text" th:text=" |Size: *{gameSize} GB|"></p>
+                    <p class="card-text" th:text="|Price: *{price}$|"></p>
+                    <a class="start-adventure-button float-md-left" th:href="@{add/{id}(id = *{id})}">Add game</a>
+                    <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete game</a>
+                    <p class="text-success mt-2" th:if="${#httpServletRequest.getParameter('added') != null}" th:text="'Game added to your inventory!'"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</body>
+</html>

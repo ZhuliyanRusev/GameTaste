@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}"></head>
+<body>
+<header th:replace="~{commons/fragments::nav}">
+</header>
+<main>
+    <div class="description">
+        <h1>Welcome to <span class="highlight">Game Taste!</span></h1>
+        <p><span class="highlight">Game Taste</span>
+            is a website that encourages all gamers to select the finest games throughout the years and <span
+                    class="highlight">taste</span> their experience.
+            Prepare for adventures you have never seen before. You could be a character of any type - from a Tarnished who
+            travels at the Lands Between to a slayer of
+            beasts from the underworld with the help of Olympic Gods.
+            Sign up today to join our community and stay up-to-date with all the latest and most rated developments in the gaming world.
+        </p>
+        <a href="/users/register" class="start-adventure-button">Start Adventure!</a>
+    </div>
+</main>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</body>
+</html>

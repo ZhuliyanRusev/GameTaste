@@ -1,0 +1,313 @@
+#scroll-to-top-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 255, 255, 0.64);
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+#scroll-to-top-button:hover {
+    background-color: #333;
+}
+body {
+    background-image: url("../images/collage pink.png");
+    width: 100%;
+    height: 1700px;
+    background-size: cover;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: lighter;
+}
+.all-games-body {
+    background-image: url("../images/GameTasteLogo2.png");
+    background-color: #7f4ca2;
+    width: 100%;
+    background-size: cover;
+    background-position-x: center;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: lighter;
+    overflow-x: hidden;
+}
+.all-merchandises-body {
+    background-image: url("../images/GameTasteLogo2.png");
+    background-color: #7f4ca2;
+    width: 100%;
+    background-size: cover;
+    background-position-x: center;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: lighter;
+    overflow-x: hidden;
+}
+
+.nav-button {
+    font-family: cursive;
+    font-weight: 0;
+    font-style: normal;
+
+}
+
+
+nav {
+    background-color: #8853AF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: -30px;
+    height: auto;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px -30px;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav .logo img {
+    max-width: 250px;
+    padding: 20px;
+    margin: -60px;
+    height: auto;
+}
+
+
+.description {
+    font-family: cursive;
+    border: 10px solid aqua;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgba(136, 83, 175, 0.65);
+    top: 61%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 600px;
+
+}
+
+.highlight {
+    color: #ff0;
+    font-weight: bold;
+}
+
+.start-adventure-button {
+    font-family: cursive;
+    background-color: #F44336;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.start-adventure-button:hover {
+    background-color: #D32F2F;
+}
+
+.nav-button:hover {
+    background-color: rgb(211, 47, 47);
+}
+
+footer {
+    font-family: cursive;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #8853AF;
+    color: #fff;
+    padding: 3px;
+}
+
+form {
+    font-family: cursive;
+    text-align: left;
+    border: 10px solid aqua;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+    max-width: 400px;
+    position: absolute;
+    top: auto;
+    left: 0;
+    bottom: auto;
+    right: 0;
+    background-color: rgba(136, 83, 175, 0.65);
+    margin-top: 200px;
+}
+
+form label,
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="submit"] {
+    margin-bottom: 5px;
+}
+
+input[type=submit] {
+    background-color: #D32F2F;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.home-body {
+    background-image: url("../images/GameTasteLogo2.png");
+    background-color: #8853AF;
+
+}
+
+.carousel {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 400px;
+    position: center;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    background-color: transparent;
+    border: none;
+    width: 20px;
+    height: 20px;
+    top: -1000%;
+    transform: translateY(1000%);
+}
+
+.text-above-carousel {
+    border-radius: 15px;
+    font-family: cursive;
+    border: 10px solid aqua;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgba(136, 83, 175, 0.65);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+    z-index: 1;
+}
+
+.text-below-carousel {
+    border-radius: 15px;
+    font-family: cursive;
+    border: 10px solid aqua;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgba(136, 83, 175, 0.65);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+    margin-top: 600px;
+    margin-left: 7px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    margin-top: -200px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    max-width: 800px;
+}
+
+.grid-item {
+    text-align: center;
+    padding: 10px;
+}
+
+.grid-item img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.card-img-news{
+    width: 30%;
+    height: 30%;
+    display: block;
+    margin: auto;
+}
+.card {
+    font-family: cursive;
+    border: 10px solid aqua !important;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgba(136, 83, 175, 0.80) !important;
+    margin-top: 150px;
+}
+
+.card-img-all-items {
+    border-radius: 15px;
+    width: 100%;
+    height: 40%;
+}
+
+.all-items-card {
+    font-family: cursive;
+    border: 3px solid aqua !important;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    background-color: rgba(25, 199, 199, 0.64) !important;
+    margin-top: 75px;
+    width: 400px;
+    height: 600px;
+}
+hr {
+    background-color: aqua;
+    height: 4px !important;
+    margin: -1px;
+}
+
+.your-games-header,
+.your-merchandises-header {
+    margin-right: 700px;
+    margin-left: 700px;
+    margin-top: 40px;
+    color: white;
+    border-radius: 15px;
+    font-family: cursive;
+    background-color: rgba(25, 199, 199, 0.84) !important;
+}

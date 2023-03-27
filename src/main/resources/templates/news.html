@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}"></head>
+<body class>
+<header th:replace="~{commons/fragments::nav}">
+</header>
+<div class="card" th:each="a: ${allNews}" th:object="${a}">
+    <img th:src="*{imageUrl}" class="card-img-news" alt="...">
+    <div class="card-body">
+        <h5 class="card-title" th:text="*{title}"></h5>
+        <p class="card-text" th:text="'From Date: ' + *{fromDate}"></p>
+        <p class="card-text" th:text="*{description}"></p>
+        <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete news</a>
+    </div>
+</div>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</body>
+</html>

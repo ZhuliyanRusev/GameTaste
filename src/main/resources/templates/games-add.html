@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}"></head>
+<body>
+<header th:replace="~{commons/fragments::nav}"></header>
+<form class="mx-auto w-25 bg-blur" action="/games/add" method="POST" th:object="${gamesCreateBindingModel}">
+  <h1 class="text-center mt-2"><span class="badge badge-pill badge-info">Add Game</span></h1>
+  <div class="form-group">
+    <div class="label-holder textCol d-flex justify-content-center">
+      <label for="imageUrl" class="h4 mb-2 text-white">Image URL</label>
+    </div>
+    <input th:field="*{imageUrl}" th:errorclass="bg-danger" type="text" class="form-control" id="imageUrl"
+           name="imageUrl"/>
+    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="text-danger">imageUrl Error message</small>
+  </div>
+  <div class="form-group">
+    <div class="label-holder text-white textCol d-flex justify-content-center">
+      <label for="gameName" class="h4 mb-2">Name of the game</label>
+    </div>
+    <input th:field="*{gameName}" th:errorclass="bg-danger" type="text" class="form-control" id="gameName" name="gameName"/>
+    <small th:if="${#fields.hasErrors('gameName')}" th:errors="*{gameName}" class="text-danger">Game name error message</small>
+  </div>
+  <div class="form-group">
+    <div class="text-white label-holder d-flex justify-content-center">
+      <label for="category" class="h4 mb-2">Category</label>
+    </div>
+    <select th:field="*{category}" th:errorclass="bg-danger" class="browser-default custom-select" id="category" name="category">
+      <option value="">Select category</option>
+      <option th:each="c : ${T(com.example.gametaste.model.entity.enums.GameCategory).values()}" th:text="${c}" th:value="${c}"></option>
+    </select>
+    <small th:if="${#fields.hasErrors('category')}" th:errors="*{category}" class="text-danger">Category error message</small>
+  </div>
+
+  <div class="form-group">
+    <div class="label-holder text-white textCol d-flex justify-content-center">
+      <label for="releaseDate" class="h4 mb-2">Game Release Date</label>
+    </div>
+    <input th:field="*{releaseDate}" th:errorclass="bg-danger" type="date" class="form-control" id="releaseDate" name="releaseDate"/>
+    <small th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}" class="text-danger">Release Date error message</small>
+  </div>
+  <div class="form-group">
+    <div class="label-holder textCol d-flex justify-content-center">
+      <label for="gameSize" class="h4 mb-2">Game size</label>
+    </div>
+    <input th:field="*{gameSize}" th:errorclass="bg-danger" type="text" class="form-control" id="gameSize" name="gameSize"/>
+    <small th:if="${#fields.hasErrors('gameSize')}" th:errors="*{gameSize}" class="text-danger">Game size error message</small>
+  </div>
+  <div class="form-group">
+    <div class="label-holder textCol d-flex justify-content-center">
+      <label for="price" class="h4 mb-2">Game price</label>
+    </div>
+    <input th:field="*{price}" th:errorclass="bg-danger" type="text" class="form-control" id="price" name="price"/>
+    <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger">Price error message</small>
+  </div>
+  <div class="button-holder d-flex justify-content-center">
+    <button type="submit" class="btn btn-light mb-3 bg-info" value="Register">Create Game</button>
+  </div>
+</form>
+</body>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</html>

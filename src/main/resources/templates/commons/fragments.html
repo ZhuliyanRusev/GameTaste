@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <title>Game Taste</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script>
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      console.log("scrollFunction called");
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        console.log("scrollPosition > 20");
+        document.getElementById("scroll-to-top-button").style.display = "block";
+      } else {
+        console.log("scrollPosition <= 20");
+        document.getElementById("scroll-to-top-button").style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      console.log("topFunction called");
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  </script>
+</head>
+<body>
+<header th:fragment="nav">
+<nav class="navbar">
+  <ul>
+    <li>
+      <div class="logo">
+        <img src="/images/GameTasteLogo.png" alt="GameTaste">
+      </div>
+    </li>
+    <li>
+      <a class="nav-button" href="/">Home</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/games/all">All Games</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/users/items">My Items</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/news">News</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/merchandises/all">Merchandise</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/users/login">Login</a>
+    </li>
+    <li class="nav-button">
+      <a class="nav-button" href="/users/register">Register</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/users/logout">Logout</a>
+    </li>
+    <li>
+      <a class="nav-button" href="#">Admin</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/games/add">Add Games</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/news/add">Add News</a>
+    </li>
+    <li>
+      <a class="nav-button" href="/merchandises/add">Add Merchandises</a>
+    </li>
+  </ul>
+</nav>
+</header>
+<footer th:fragment="footer">
+  <button onclick="topFunction()" class="scroll-to-top-button" id="scroll-to-top-button" title="Go to top">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+  <p> &copy;Game Taste 2023. All rights reserved.</p>
+</footer>
+</body>
+</html>
