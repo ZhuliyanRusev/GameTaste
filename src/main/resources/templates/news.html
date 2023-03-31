@@ -11,7 +11,7 @@
         <h5 class="card-title" th:text="*{title}"></h5>
         <p class="card-text" th:text="'From Date: ' + *{fromDate}"></p>
         <p class="card-text" th:text="*{description}"></p>
-        <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete news</a>
+        <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}" th:if="${session.user.getUsername() == 'Admin'}">Delete news</a>
     </div>
 </div>
 <footer th:replace="~{commons/fragments::footer}"></footer>

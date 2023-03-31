@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" >
 <head th:fragment="head">
   <title>Game Taste</title>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -32,52 +32,52 @@
 </head>
 <body>
 <header th:fragment="nav">
-<nav class="navbar">
-  <ul>
-    <li>
-      <div class="logo">
-        <img src="/images/GameTasteLogo.png" alt="GameTaste">
-      </div>
-    </li>
-    <li>
-      <a class="nav-button" href="/">Home</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/games/all">All Games</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/users/items">My Items</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/news">News</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/merchandises/all">Merchandise</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/users/login">Login</a>
-    </li>
-    <li class="nav-button">
-      <a class="nav-button" href="/users/register">Register</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/users/logout">Logout</a>
-    </li>
-    <li>
-      <a class="nav-button" href="#">Admin</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/games/add">Add Games</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/news/add">Add News</a>
-    </li>
-    <li>
-      <a class="nav-button" href="/merchandises/add">Add Merchandises</a>
-    </li>
-  </ul>
-</nav>
-</header>
+    <nav class="navbar">
+      <ul>
+        <li>
+          <div class="logo">
+            <img src="/images/GameTasteLogo.png" alt="GameTaste">
+          </div>
+        </li>
+        <li>
+          <a class="nav-button" href="/">Home</a>
+        </li>
+        <th:block th:if="${session.user != null}">
+          <li>
+            <a class="nav-button" href="/users/items">My Items</a>
+          </li>
+          <li>
+            <a class="nav-button" href="/games/all">All Games</a>
+          </li>
+          <li>
+            <a class="nav-button" href="/merchandises/all">Merchandise</a>
+          </li>
+          <li>
+            <a class="nav-button" href="/news">News</a>
+          </li>
+        </th:block>
+        <th:block th:if="${session.user == null}">
+          <li>
+            <a class="nav-button" href="/users/login">Login</a>
+          </li>
+          <li class="nav-button">
+            <a class="nav-button" href="/users/register">Register</a>
+          </li>
+        </th:block>
+
+        <th:block th:if="${session.user != null}">
+          <li>
+            <a class="nav-button" href="/users/logout">Logout</a>
+          </li>
+        </th:block>
+        <th:block th:if="${session.user != null and session.user.getUserRoleEnum().name() == 'ADMIN'}">
+          <li>
+            <a class="nav-button" href="/users/admin">Admin</a>
+          </li>
+        </th:block>
+      </ul>
+    </nav>
+  </header>
 <footer th:fragment="footer">
   <button onclick="topFunction()" class="scroll-to-top-button" id="scroll-to-top-button" title="Go to top">
     <i class="fa fa-arrow-up"></i>

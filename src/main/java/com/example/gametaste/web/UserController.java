@@ -1,6 +1,8 @@
 package com.example.gametaste.web;
 import com.example.gametaste.model.binding.UserLoginBindingModel;
 import com.example.gametaste.model.binding.UserRegisterBindingModel;
+import com.example.gametaste.model.entity.Game;
+import com.example.gametaste.model.entity.Merchandise;
 import com.example.gametaste.model.entity.User;
 import com.example.gametaste.model.service.UserServiceModel;
 import com.example.gametaste.security.CurrentUser;
@@ -10,12 +12,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
@@ -44,8 +45,8 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model){
-        if (model.containsAttribute("notFound")){
-            model.addAttribute("notFound", false);
+        if(!model.containsAttribute("userAlreadyExists")){
+            model.addAttribute("userAlreadyExists",false);
         }
         return "register";
     }
@@ -53,7 +54,7 @@ public class UserController {
     @PostMapping("/register")
     public String registerConfirm(@Valid UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes){
+                                  RedirectAttributes redirectAttributes, Model model){
 
         if(bindingResult.hasErrors() || !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
@@ -64,6 +65,8 @@ public class UserController {
 
 
         if (userService.doesUsernameExist(userRegisterBindingModel.getUsername()) || userService.doesEmailExist(userRegisterBindingModel.getEmail())) {
+           redirectAttributes.addFlashAttribute("userRegisterBindingModel",userRegisterBindingModel)
+                   .addFlashAttribute("userAlreadyExists",true);
             return "redirect:register";
         }
 
@@ -117,6 +120,40 @@ public class UserController {
         User currentUser = userService.findUserById(this.currentUser.getId());
         model.addAttribute("userGamesSet",currentUser.getGamesSet());
         model.addAttribute("userMerchandisesSet",currentUser.getMerchandisesSet());
+
+        BigDecimal totalGamesPrice = currentUser.getGamesSet().stream()
+                .map(Game::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        model.addAttribute("allGamesPrice", totalGamesPrice);
+
+        BigDecimal totalMerchandisesPrice = currentUser.getMerchandisesSet().stream()
+                .map(Merchandise::getPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        model.addAttribute("allMerchandisesPrice", totalMerchandisesPrice);
+
+        int itemsCount = currentUser.getGamesSet().size();
+        itemsCount += currentUser.getMerchandisesSet().size();
+        model.addAttribute("allItemsCount", itemsCount);
         return "users-items";
+    }
+    @GetMapping("/remove/{id}")
+    public String removeItem(@PathVariable Long id){
+        User currentUser = userService.findUserById(this.currentUser.getId());
+        Set<Game> gamesSet = currentUser.getGamesSet();
+        gamesSet.removeIf(game -> game.getId().equals(id));
+        userService.saveUser(currentUser);
+        return "redirect:/users/items";
+    }
+    @GetMapping("/removeMerchandise/{id}")
+    public String removeMerchandise(@PathVariable Long id){
+        User currentUser = userService.findUserById(this.currentUser.getId());
+        Set<Merchandise> merchandiseSet = currentUser.getMerchandisesSet();
+        merchandiseSet.removeIf(game -> game.getId().equals(id));
+        userService.saveUser(currentUser);
+        return "redirect:/users/items";
+    }
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "users-admin";
     }
 }

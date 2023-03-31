@@ -15,7 +15,7 @@
                     <p class="card-text" th:text="|Release date: *{releaseDate}|"></p>
                     <p class="card-text" th:text="|Price: *{price}$|"></p>
                     <a class="start-adventure-button float-md-left" th:href="@{add/{id}(id = *{id})}">Add merch</a>
-                    <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete merch</a>
+                    <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}" th:if="${session.user.getUsername() == 'Admin'}">Delete merch</a>
                     <p class="text-success mt-2" th:if="${#httpServletRequest.getParameter('added') != null}" th:text="'Merchandise added to your inventory!'"></p>
                 </div>
             </div>

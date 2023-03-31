@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{commons/fragments::head}">
+</head>
+<body class="all-games-body">
+<header th:replace="~{commons/fragments::nav}"></header>
+<div class="container">
+  <h1 class="text-white text-center admin-heading">Welcome, Admin!</h1>
+
+  <a href="/games/add" class="btn btn-danger admin-button start-adventure-button">Add Game</a>
+
+  <a href="/merchandises/add" class="btn btn-danger admin-button start-adventure-button">Add Merchandise</a>
+
+  <a href="/news/add" class="btn btn-danger admin-button start-adventure-button">Add News</a>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<footer th:replace="~{commons/fragments::footer}"></footer>
+</body>
+</html>

@@ -1,5 +1,7 @@
 package com.example.gametaste.model.entity;
 
+import com.example.gametaste.model.entity.enums.UserRoleEnum;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -12,6 +14,7 @@ public class User extends BaseEntity{
     private String lastName;
     private String email;
     private String password;
+    private UserRoleEnum userRoleEnum;
     private Set<Game> gamesSet = new LinkedHashSet<>();
     private Set<Merchandise> merchandisesSet = new LinkedHashSet<>();
 
@@ -63,6 +66,14 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
+    @Enumerated(EnumType.STRING)
+    public UserRoleEnum getUserRoleEnum() {
+        return userRoleEnum;
+    }
+
+    public void setUserRoleEnum(UserRoleEnum userRoleEnum) {
+        this.userRoleEnum = userRoleEnum;
+    }
     @ManyToMany(fetch = FetchType.EAGER)
     public Set<Game> getGamesSet() {
         return gamesSet;
@@ -80,4 +91,5 @@ public class User extends BaseEntity{
     public void setMerchandisesSet(Set<Merchandise> merchandisesSet) {
         this.merchandisesSet = merchandisesSet;
     }
+
 }

@@ -5,14 +5,16 @@
 <body>
 <header th:replace="~{commons/fragments::nav}"></header>
 <main>
-  <form class="mx-auto w-25 bg-blur" action="/users/login" method="POST" th:object="${userLoginBindingModel}">
+  <form class="mx-auto w-25 bg-blur" action="/users/login" method="POST" th:object="${userLoginBindingModel}" th:csrf>
+
+    <div class="text-danger text-center" th:if="${notFound == true}">Incorrect username or password!</div>
 
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-info">Login</span></h1>
     <th:block th:each="e : ${#fields.errors()}" th:object="${e}">
-      <small th:text="${e}" class="text-danger">Error message</small>
+      <small th:text="${e}" class="text-danger text-center">Error message</small>
       <br/>
     </th:block>
-    <div class="text-danger" th:if="${notFound == true}">Incorrect username or password!</div>
+
 
     <div class="form-group">
       <div class="label-holder text-white d-flex justify-content-center">

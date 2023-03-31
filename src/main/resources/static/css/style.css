@@ -138,7 +138,7 @@ nav .logo img {
 footer {
     font-family: cursive;
     position: fixed;
-    bottom: 0;
+    bottom: -15px;
     left: 0;
     width: 100%;
     text-align: center;
@@ -292,12 +292,12 @@ input[type=submit] {
     color: white;
     background-color: rgba(25, 199, 199, 0.64) !important;
     margin-top: 75px;
-    width: 400px;
+    width: 405px;
     height: 600px;
 }
 hr {
     background-color: aqua;
-    height: 4px !important;
+    height: 7px !important;
     margin: -1px;
 }
 
@@ -310,4 +310,81 @@ hr {
     border-radius: 15px;
     font-family: cursive;
     background-color: rgba(25, 199, 199, 0.84) !important;
+}
+.item-count {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #09c909;
+    color: white;
+    font-size: 0.8em;
+    width: 1.3em;
+    height: 1.4em;
+    text-align: center;
+    line-height: 1.5em;
+    margin-left: 0.2em;
+}
+.buy-all-items-button{
+    margin-right: 640px;
+    margin-left: 640px;
+    font-family: cursive;
+    background-color: #F44336;
+    color: #FFFFFF !important;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buy-all-items-button:hover {
+    background-color: #D32F2F;
+}
+
+.admin-button.start-adventure-button {
+    border-radius: 15px;
+    font-family: cursive;
+    border: 5px solid aqua;
+    padding: 15px 30px;
+    text-align: center;
+    color: white;
+    position: absolute;
+    background-color: rgba(25, 199, 199, 0.64);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+}
+
+.admin-button:nth-child(1) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+}
+
+.admin-button:nth-child(2) {
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+}
+
+.admin-button:nth-child(3) {
+    top: 110%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 800px;
+}
+.admin-heading {
+    margin-top: 30px;
+    border-radius: 15px;
+    font-family: cursive;
+    background-color: rgba(25, 199, 199, 0.6);
+    padding: 10px;
+    text-align: center;
+    color: white;
 }

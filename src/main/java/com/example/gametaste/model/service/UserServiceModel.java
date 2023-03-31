@@ -1,5 +1,7 @@
 package com.example.gametaste.model.service;
 
+import com.example.gametaste.model.entity.enums.UserRoleEnum;
+
 public class UserServiceModel {
     private Long id;
     private String username;
@@ -7,6 +9,8 @@ public class UserServiceModel {
     private String lastName;
     private String email;
     private String password;
+
+    private UserRoleEnum userRoleEnum;
 
 
     public UserServiceModel() {
@@ -58,5 +62,13 @@ public class UserServiceModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRoleEnum getUserRoleEnum() {
+        return userRoleEnum;
+    }
+
+    public void setUserRoleEnum(UserRoleEnum userRoleEnum) {
+        this.userRoleEnum = userRoleEnum;
     }
 }

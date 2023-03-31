@@ -6,7 +6,10 @@
 <body>
 <header th:replace="~{commons/fragments::nav}"></header>
 <main>
-    <form class="mx-auto w-25 bg-blur" method="POST" action="/users/register" th:object="${userRegisterBindingModel}">
+    <form class="mx-auto w-25 bg-blur" method="POST" action="/users/register" th:object="${userRegisterBindingModel}" th:csrf>
+
+        <div class="text-danger text-center" th:if="${userAlreadyExists == true}">Username or email already taken!</div>
+
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-info">Register</span></h1>
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">

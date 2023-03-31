@@ -18,4 +18,6 @@ public interface UserService {
     User findUserById(Long id);
 
     void saveUser(User currentUser);
+
+    void initializeAdmin();
 }

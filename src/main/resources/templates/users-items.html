@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{commons/fragments::head}"></head>
+<head th:replace="~{commons/fragments::head}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
 <body>
-<header th:replace="~{commons/fragments::nav}"></header>
+<header>
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <div class="logo">
+                        <img src="/images/GameTasteLogo.png" alt="GameTaste">
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-button" href="/">Home</a>
+                </li>
+                <th:block th:if="${session.user != null}">
+                    <a class="nav-button" href="/users/items">My Items
+                        <th:block th:if="${allItemsCount} != 0">
+                            <span class="item-count" th:text="${allItemsCount}"></span>
+                        </th:block>
+                    </a>
+                    <li>
+                        <a class="nav-button" href="/games/all">All Games</a>
+                    </li>
+                    <li>
+                        <a class="nav-button" href="/merchandises/all">Merchandise</a>
+                    </li>
+                    <li>
+                        <a class="nav-button" href="/news">News</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${session.user == null}">
+                    <li>
+                        <a class="nav-button" href="/users/login">Login</a>
+                    </li>
+                    <li class="nav-button">
+                        <a class="nav-button" href="/users/register">Register</a>
+                    </li>
+                </th:block>
+
+                <th:block th:if="${session.user != null}">
+                    <li>
+                        <a class="nav-button" href="/users/logout">Logout</a>
+                    </li>
+                </th:block>
+                <th:block th:if="${session.user != null and session.user.getUserRoleEnum().name() == 'ADMIN'}">
+                    <li>
+                        <a class="nav-button" href="/users/admin">Admin</a>
+                    </li>
+                </th:block>
+            </ul>
+    </nav>
+</header>
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h2 class="your-games-header text-center">Your Games</h2>
-            <hr>
+            <th:block th:if="${userGamesSet.size() != 0}">
+                <h2 class="your-games-header text-center">Your Games</h2>
+                <hr>
+                <a class="buy-all-items-button"  th:text="|Buy all games for *{allGamesPrice}$|"></a>
+            </th:block>
         </div>
     </div>
     <div class="row">
@@ -21,17 +75,26 @@
                     <p class="card-text" th:text="|Release date: *{releaseDate}|"></p>
                     <p class="card-text" th:text=" |Size: *{gameSize} GB|"></p>
                     <a class="start-adventure-button float-md-left"  th:text="|Buy for *{price}$|"></a>
-                    <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete game</a>
+                    <a class="start-adventure-button float-md-right" th:href="@{remove/{id}(id = *{id})}">Remove item</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <h2 class="your-merchandises-header text-center">Your Merchandise</h2>
-            <hr>
+            <th:block th:if="${userMerchandisesSet.size() != 0}">
+                <h2 class="your-merchandises-header text-center">Your Merchandise</h2>
+                <hr>
+                <a class="buy-all-items-button"  th:text="|Buy all merchandises for *{allMerchandisesPrice}$|"></a>
+            </th:block>
         </div>
     </div>
+    <th:block th:if="${userGamesSet.size() + userMerchandisesSet.size() == 0}">
+        <div class="text-above-carousel">
+            <h2>You need to add <span class="highlight">Games or Merchandises</span>
+                to start the <span class="highlight">Adventure!</span></h2>
+        </div>
+    </th:block>
     <div class="row">
         <div class="col-12 col-md-6 col-lg-3 mb-4" th:each="m: ${userMerchandisesSet}" th:object="${m}">
             <div class="all-items-card">
@@ -41,7 +104,7 @@
                     <p class="card-text" th:text="|Category: *{category}|"></p>
                     <p class="card-text" th:text="|Release date: *{releaseDate}|"></p>
                     <a class="start-adventure-button float-md-left"  th:text="|Buy for *{price}$|"></a>
-                    <a class="start-adventure-button float-md-right" th:href="@{delete/{id}(id = *{id})}">Delete merch</a>
+                    <a class="start-adventure-button float-md-right" th:href="@{removeMerchandise/{id}(id = *{id})}">Remove item</a>
                 </div>
             </div>
         </div>

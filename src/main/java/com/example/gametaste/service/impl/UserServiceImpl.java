@@ -1,6 +1,7 @@
 package com.example.gametaste.service.impl;
 
 import com.example.gametaste.model.entity.User;
+import com.example.gametaste.model.entity.enums.UserRoleEnum;
 import com.example.gametaste.model.service.UserServiceModel;
 import com.example.gametaste.repository.UserRepository;
 import com.example.gametaste.security.CurrentUser;
@@ -18,12 +19,13 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.currentUser = currentUser;
+
     }
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel,User.class);
-
+        user.setUserRoleEnum(UserRoleEnum.USER);
         return modelMapper.map(userRepository.save(user), UserServiceModel.class);
     }
 
@@ -58,6 +60,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User currentUser) {
         userRepository.save(currentUser);
+    }
+
+    @Override
+    public void initializeAdmin() {
+        if (userRepository.count() == 0) {
+            User user = new User();
+            user.setUsername("Admin");
+            user.setEmail("admin@admin");
+            user.setFirstName("Admin");
+            user.setLastName("Admin");
+            user.setPassword("111");
+            user.setUserRoleEnum(UserRoleEnum.ADMIN);
+            userRepository.save(user);
+        }
     }
 
 }
