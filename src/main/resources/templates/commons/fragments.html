@@ -6,6 +6,10 @@
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script>
     window.onscroll = function() {scrollFunction()};
 
@@ -32,52 +36,68 @@
 </head>
 <body>
 <header th:fragment="nav">
-    <nav class="navbar">
-      <ul>
-        <li>
-          <div class="logo">
-            <img src="/images/GameTasteLogo.png" alt="GameTaste">
-          </div>
-        </li>
-        <li>
-          <a class="nav-button" href="/">Home</a>
-        </li>
-        <th:block th:if="${session.user != null}">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand">
+        <div class="logo">
+          <img src="/images/GameTasteLogo.png" alt="GameTaste">
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <th:block th:if="${session.user!= null}">
+            <li class="text-center text-white">
+              <a class="nav-button-welcome" th:text="'Welcome, ' + ${session.user.username} + '!'"></a>
+            </li>
+          </th:block>
           <li>
-            <a class="nav-button" href="/users/items">My Items</a>
+            <a class="nav-button" href="/">Home</a>
           </li>
-          <li>
-            <a class="nav-button" href="/games/all">All Games</a>
+          <th:block th:if="${session.user != null}">
+            <li>
+              <a class="nav-button" href="/users/items">My Items</a>
+            </li>
+            <li>
+              <a class="nav-button" href="/games/all">All Games</a>
+            </li>
+            <li>
+              <a class="nav-button" href="/merchandises/all">Merchandise</a>
+            </li>
+            <li>
+              <a class="nav-button" href="/news">News</a>
+            </li>
+          </th:block>
+          <th:block th:if="${session.user == null}">
+            <li>
+              <a class="nav-button" href="/users/login">Login</a>
+            </li>
+            <li>
+              <a class="nav-button" href="/users/register">Register</a>
+            </li>
+          </th:block>
+          <th:block th:if="${session.user != null}">
+            <li>
+              <a class="nav-button" href="/users/logout">Logout</a>
+            </li>
+          </th:block>
+          <th:block th:if="${session.user != null and session.user.getUserRoleEnum().name() == 'ADMIN'}">
+            <li>
+              <a class="nav-button" href="/users/admin">Admin</a>
+            </li>
+          </th:block>
+          <li class="d-lg-none text-center">
+            <div class="logo">
+              <img src="/images/GameTasteLogo.png" alt="GameTaste" style="height: 250px; margin-top: -10px">
+            </div>
           </li>
-          <li>
-            <a class="nav-button" href="/merchandises/all">Merchandise</a>
-          </li>
-          <li>
-            <a class="nav-button" href="/news">News</a>
-          </li>
-        </th:block>
-        <th:block th:if="${session.user == null}">
-          <li>
-            <a class="nav-button" href="/users/login">Login</a>
-          </li>
-          <li class="nav-button">
-            <a class="nav-button" href="/users/register">Register</a>
-          </li>
-        </th:block>
-
-        <th:block th:if="${session.user != null}">
-          <li>
-            <a class="nav-button" href="/users/logout">Logout</a>
-          </li>
-        </th:block>
-        <th:block th:if="${session.user != null and session.user.getUserRoleEnum().name() == 'ADMIN'}">
-          <li>
-            <a class="nav-button" href="/users/admin">Admin</a>
-          </li>
-        </th:block>
-      </ul>
-    </nav>
-  </header>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 <footer th:fragment="footer">
   <button onclick="topFunction()" class="scroll-to-top-button" id="scroll-to-top-button" title="Go to top">
     <i class="fa fa-arrow-up"></i>

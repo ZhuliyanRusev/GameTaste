@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/games")
@@ -74,6 +75,16 @@ public class GameController {
 
     @GetMapping("/delete/{id}")
     public String deleteGame(@PathVariable Long id) {
+        List<User> usersWithGames = userService.findAllUsers();
+
+        usersWithGames.forEach(user -> {
+            user.getGamesSet().removeIf(game -> game.getId().equals(id));
+            userService.saveUser(user);
+        });
+//        for (User user : usersWithGame) {
+//            user.getGamesSet().removeIf(game -> game.getId().equals(id));
+//            userService.saveUser(user);
+//        }
         gameService.deleteGameById(id);
         return "redirect:/games/all";
     }

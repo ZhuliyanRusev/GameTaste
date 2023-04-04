@@ -73,8 +73,14 @@ public class MerchandiseController {
     }
     @GetMapping("/delete/{id}")
     public String deleteMerchandise(@PathVariable Long id){
-        merchandiseService.deleteMerchandiseById(id);
+        List<User> allUsers = userService.findAllUsers();
 
+        allUsers.forEach(user -> {
+            user.getMerchandisesSet().removeIf(merchandise -> merchandise.getId().equals(id));
+            userService.saveUser(user);
+        });
+        
+        merchandiseService.deleteMerchandiseById(id);
         return "redirect:/merchandises/all";
     }
 

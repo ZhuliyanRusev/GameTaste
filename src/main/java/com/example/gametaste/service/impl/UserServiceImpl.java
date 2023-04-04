@@ -8,7 +8,7 @@ import com.example.gametaste.security.CurrentUser;
 import com.example.gametaste.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -74,6 +74,11 @@ public class UserServiceImpl implements UserService {
             user.setUserRoleEnum(UserRoleEnum.ADMIN);
             userRepository.save(user);
         }
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
 }

@@ -1,7 +1,11 @@
 package com.example.gametaste.service;
 
+import com.example.gametaste.model.entity.Game;
 import com.example.gametaste.model.entity.User;
 import com.example.gametaste.model.service.UserServiceModel;
+
+import java.util.List;
+import java.util.Set;
 
 public interface UserService {
 
@@ -20,4 +24,6 @@ public interface UserService {
     void saveUser(User currentUser);
 
     void initializeAdmin();
+
+    List<User> findAllUsers();
 }

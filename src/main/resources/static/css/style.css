@@ -13,7 +13,10 @@
     border-radius: 50%;
     font-size: 18px;
 }
-
+.nav-button-welcome{
+    background: transparent;
+    font-family: cursive;
+}
 #scroll-to-top-button:hover {
     background-color: #333;
 }
@@ -87,23 +90,22 @@ nav a {
 
 nav .logo img {
     max-width: 250px;
-    padding: 20px;
-    margin: -60px;
     height: auto;
+    margin: -55px -250px -95px;
 }
 
 
 .description {
     font-family: cursive;
-    border: 10px solid aqua;
+    border: 7px solid aqua;
     border-radius: 15px;
     padding: 10px;
     text-align: center;
     color: white;
     position: absolute;
     background-color: rgba(136, 83, 175, 0.65);
-    top: 61%;
-    left: 50%;
+    top: 41000%;
+    left: 50.5%;
     transform: translate(-50%, -50%);
     max-width: 600px;
 
@@ -181,11 +183,7 @@ input[type=submit] {
     cursor: pointer;
 }
 
-.home-body {
-    background-image: url("../images/GameTasteLogo2.png");
-    background-color: #8853AF;
 
-}
 
 .carousel {
     max-width: 800px;
@@ -212,7 +210,7 @@ input[type=submit] {
     color: white;
     position: absolute;
     background-color: rgba(136, 83, 175, 0.65);
-    top: 50%;
+    top: 31000%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
@@ -228,7 +226,7 @@ input[type=submit] {
     color: white;
     position: absolute;
     background-color: rgba(136, 83, 175, 0.65);
-    top: 50%;
+    top: -49000%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
@@ -360,21 +358,21 @@ hr {
 }
 
 .admin-button:nth-child(1) {
-    top: 50%;
+    top: 10000%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
 }
 
 .admin-button:nth-child(2) {
-    top: 80%;
+    top: 30000%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
 }
 
 .admin-button:nth-child(3) {
-    top: 110%;
+    top: 50000%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 800px;
