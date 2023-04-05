@@ -66,7 +66,7 @@ public class MerchandiseController {
     }
 
     @GetMapping("/all")
-    public String allMerchandises(Model model){
+    public String allMerchandises(Model model, @ModelAttribute("message") String message){
         List<MerchandiseViewModel> allMerchandises = merchandiseService.findAllOrderByReleaseDateThenByPrice();
         model.addAttribute("allMerchandises", allMerchandises);
         return "merchandises-all";
@@ -90,7 +90,9 @@ public class MerchandiseController {
         User currentUser = userService.findUserById(this.currentUser.getId());
         currentUser.getMerchandisesSet().add(currentMerchandise);
         userService.saveUser(currentUser);
-        redirectAttributes.addAttribute("added", "true");
+        String message = currentMerchandise.getProductTitle() + " has been added to your items!";
+
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/merchandises/all";
     }
 }

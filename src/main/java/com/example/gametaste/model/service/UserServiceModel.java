@@ -1,6 +1,11 @@
 package com.example.gametaste.model.service;
 
+import com.example.gametaste.model.entity.Game;
+import com.example.gametaste.model.entity.Merchandise;
 import com.example.gametaste.model.entity.enums.UserRoleEnum;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class UserServiceModel {
     private Long id;
@@ -9,8 +14,9 @@ public class UserServiceModel {
     private String lastName;
     private String email;
     private String password;
-
     private UserRoleEnum userRoleEnum;
+    private Set<Game> gamesSet = new LinkedHashSet<>();
+    private Set<Merchandise> merchandisesSet = new LinkedHashSet<>();
 
 
     public UserServiceModel() {
@@ -70,5 +76,21 @@ public class UserServiceModel {
 
     public void setUserRoleEnum(UserRoleEnum userRoleEnum) {
         this.userRoleEnum = userRoleEnum;
+    }
+
+    public Set<Game> getGamesSet() {
+        return gamesSet;
+    }
+
+    public void setGamesSet(Set<Game> gamesSet) {
+        this.gamesSet = gamesSet;
+    }
+
+    public Set<Merchandise> getMerchandisesSet() {
+        return merchandisesSet;
+    }
+
+    public void setMerchandisesSet(Set<Merchandise> merchandisesSet) {
+        this.merchandisesSet = merchandisesSet;
     }
 }

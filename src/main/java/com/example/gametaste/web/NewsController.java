@@ -1,4 +1,5 @@
 package com.example.gametaste.web;
+
 import com.example.gametaste.model.binding.NewsCreateBindingModel;
 import com.example.gametaste.model.service.NewsServiceModel;
 import com.example.gametaste.security.UrlValidator;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.validation.Valid;
 
 @Controller
@@ -61,7 +63,7 @@ public class NewsController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteGame(@PathVariable Long id){
+    public String deleteGame(@PathVariable Long id) {
         newsService.deleteById(id);
 
         return "redirect:/news";

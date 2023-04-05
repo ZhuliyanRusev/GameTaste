@@ -4,7 +4,6 @@ import com.example.gametaste.model.binding.GamesCreateBindingModel;
 import com.example.gametaste.model.entity.Game;
 import com.example.gametaste.model.entity.User;
 import com.example.gametaste.model.service.GameServiceModel;
-import com.example.gametaste.model.view.GamesViewModel;
 import com.example.gametaste.security.CurrentUser;
 import com.example.gametaste.security.UrlValidator;
 import com.example.gametaste.service.GameService;
@@ -15,10 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/games")
@@ -67,12 +64,12 @@ public class GameController {
         return "redirect:all";
     }
 
+
     @GetMapping("/all")
-    public String allGames(Model model) {
+    public String allGames(Model model, @ModelAttribute("message") String message) {
         model.addAttribute("allGames", gameService.findAllGamesSortByPriceDescending());
         return "games-all";
     }
-
     @GetMapping("/delete/{id}")
     public String deleteGame(@PathVariable Long id) {
         List<User> usersWithGames = userService.findAllUsers();
@@ -95,7 +92,12 @@ public class GameController {
         User currentUser = userService.findUserById(this.currentUser.getId());
         currentUser.getGamesSet().add(currentGame);
         userService.saveUser(currentUser);
-        redirectAttributes.addAttribute("added", "true");
+
+        String message = currentGame.getGameName() + " has been added to your items!";
+
+        redirectAttributes.addFlashAttribute("message", message);
+
+
         return "redirect:/games/all";
     }
 }
