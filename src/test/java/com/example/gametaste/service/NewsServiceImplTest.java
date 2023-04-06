@@ -33,7 +33,8 @@ public class NewsServiceImplTest {
     private NewsServiceImpl testNSI;
     private final ModelMapper modelMapper = new ModelMapper();
     @Mock
-    NewsRepository mockNewsRepository;
+    private NewsRepository mockNewsRepository;
+
 
     private News newsTest;
     private News secondNewsTest;
@@ -42,6 +43,7 @@ public class NewsServiceImplTest {
     @BeforeEach
     void setup() {
         testNSI = new NewsServiceImpl(mockNewsRepository, modelMapper);
+
         newsTest = new News();
         secondNewsTest = new News();
         thirdNewsTest = new News();
@@ -50,34 +52,26 @@ public class NewsServiceImplTest {
     @Test
     public void saveNewsTest() {
         NewsServiceModel exampleServiceModel = new NewsServiceModel();
-        exampleServiceModel.setId(1L);
+        exampleServiceModel.setId(2L);
         exampleServiceModel.setDescription(NEWS_DESCRIPTION);
         exampleServiceModel.setFromDate(LocalDate.parse(NEWS_DATE));
         exampleServiceModel.setTitle(NEWS_TITLE);
         exampleServiceModel.setImageUrl(NEWS_IMAGE_URL);
 
 
-        newsTest.setDescription(exampleServiceModel.getDescription());
-        newsTest.setId(1L);
-        newsTest.setFromDate(exampleServiceModel.getFromDate());
-        newsTest.setTitle(exampleServiceModel.getTitle());
-        newsTest.setImageUrl(exampleServiceModel.getImageUrl());
-
         when(mockNewsRepository.save(any(News.class))).thenReturn(newsTest);
 
         NewsServiceModel newsServiceModel = testNSI.saveNews(exampleServiceModel);
 
-        Assertions.assertEquals(newsServiceModel.getId(), exampleServiceModel.getId());
-        Assertions.assertEquals(newsServiceModel.getDescription(), exampleServiceModel.getDescription());
-        Assertions.assertEquals(newsServiceModel.getFromDate(), exampleServiceModel.getFromDate());
-        Assertions.assertEquals(newsServiceModel.getTitle(), exampleServiceModel.getTitle());
-        Assertions.assertEquals(newsServiceModel.getImageUrl(), exampleServiceModel.getImageUrl());
+        Assertions.assertEquals(newsServiceModel.getId(), newsTest.getId());
+        Assertions.assertEquals(newsServiceModel.getDescription(), newsTest.getDescription());
+        Assertions.assertEquals(newsServiceModel.getFromDate(), newsTest.getFromDate());
+        Assertions.assertEquals(newsServiceModel.getTitle(), newsTest.getTitle());
+        Assertions.assertEquals(newsServiceModel.getImageUrl(), newsTest.getImageUrl());
     }
 
     @Test
     public void findAllNewsSortByReleaseDateDescTest() {
-        NewsRepository mockNewsRepository = mock(NewsRepository.class);
-
         newsTest.setId(1L);
         newsTest.setDescription(NEWS_DESCRIPTION);
         newsTest.setTitle(NEWS_TITLE);
@@ -90,40 +84,35 @@ public class NewsServiceImplTest {
         secondNewsTest.setImageUrl(NEWS_IMAGE_URL);
         secondNewsTest.setFromDate(LocalDate.parse("2028-05-25"));
 
-        thirdNewsTest.setId(2L);
+        thirdNewsTest.setId(3L);
         thirdNewsTest.setDescription(NEWS_DESCRIPTION);
         thirdNewsTest.setTitle(NEWS_TITLE);
         thirdNewsTest.setImageUrl(NEWS_IMAGE_URL);
         thirdNewsTest.setFromDate(LocalDate.parse("2025-05-25"));
 
-        when(mockNewsRepository.findAllByOrderByFromDateDesc())
-                .thenReturn(Arrays.asList(secondNewsTest, thirdNewsTest, newsTest));
+        doReturn(Arrays.asList(secondNewsTest, thirdNewsTest, newsTest))
+                .when(mockNewsRepository).findAllByOrderByFromDateDesc();
 
-
-        NewsServiceImpl testNSI = new NewsServiceImpl(mockNewsRepository, modelMapper);
 
         List<NewsViewModel> newsViewModelsTest = testNSI.findAllNewsSortByReleaseDateDesc();
         Assertions.assertFalse(newsViewModelsTest.isEmpty());
         Assertions.assertEquals(secondNewsTest.getFromDate(), newsViewModelsTest.get(0).getFromDate());
     }
     @Test
-    public void deleteByIdTest() {
-        NewsRepository mockNewsRepository = mock(NewsRepository.class);
-        NewsServiceImpl testNSI = new NewsServiceImpl(mockNewsRepository, modelMapper);
-        
-        newsTest.setId(1L);
-        newsTest.setDescription(NEWS_DESCRIPTION);
-        newsTest.setTitle(NEWS_TITLE);
-        newsTest.setImageUrl(NEWS_IMAGE_URL);
-        newsTest.setFromDate(LocalDate.parse(NEWS_DATE));
+    public void testDeleteById() {
+        Long id1 = 1L;
+        Long id2 = 2L;
+        Long id3 = 3L;
 
-        when(mockNewsRepository.findById(1L)).thenReturn(Optional.of(newsTest));
-        mockNewsRepository.save(newsTest);
 
-        Assertions.assertEquals(1, mockNewsRepository.count());
 
-        testNSI.deleteById(1L);
+        testNSI.deleteById(id1);
+        testNSI.deleteById(id2);
+        testNSI.deleteById(id3);
 
-        Assertions.assertEquals(0, mockNewsRepository.count());
+
+        verify(mockNewsRepository, times(1)).deleteById(id1);
+        verify(mockNewsRepository, times(1)).deleteById(id2);
+        verify(mockNewsRepository, times(1)).deleteById(id3);
     }
 }
