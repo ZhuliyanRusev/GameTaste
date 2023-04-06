@@ -1,8 +1,6 @@
 package com.example.gametaste.service;
 
-import com.example.gametaste.model.entity.Category;
 import com.example.gametaste.model.entity.Merchandise;
-import com.example.gametaste.model.entity.News;
 import com.example.gametaste.model.entity.enums.MerchandiseEnum;
 import com.example.gametaste.model.service.MerchandiseServiceModel;
 import com.example.gametaste.model.view.MerchandiseViewModel;
