@@ -67,7 +67,7 @@ public class GameController {
 
     @GetMapping("/all")
     public String allGames(Model model, @ModelAttribute("message") String message) {
-        model.addAttribute("allGames", gameService.findAllGamesSortByPriceDescending());
+        model.addAttribute("allGames", gameService.findAllGamesSortByReleaseDateThenByPriceThenByGameSizeDesc());
         return "games-all";
     }
     @GetMapping("/delete/{id}")

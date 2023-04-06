@@ -46,6 +46,14 @@ public class MerchandiseServiceImplTest {
         testMSI = new MerchandiseServiceImpl(modelMapper, mockMerchandiseRepository);
 
         testMerchandise = new Merchandise();
+
+        testMerchandise.setId(1L);
+        testMerchandise.setImageUrl(MERCHANDISE_IMAGE_URL);
+        testMerchandise.setCategory(MerchandiseEnum.FIGURES);
+        testMerchandise.setPrice(BigDecimal.valueOf(70));
+        testMerchandise.setProductTitle(MERCHANDISE_TITLE);
+        testMerchandise.setReleaseDate(LocalDate.parse(MERCHANDISE_DATE));
+
         secondTestMerchandise = new Merchandise();
         thirdTestMerchandise = new Merchandise();
     }
@@ -68,7 +76,7 @@ public class MerchandiseServiceImplTest {
 
 
         Assertions.assertEquals(testMerchandiseServiceModel.getId(), testMerchandise.getId());
-        Assertions.assertNotEquals(testMerchandiseServiceModel.getId(),convertMerchandiseServiceModel.getId());
+        Assertions.assertNotEquals(testMerchandiseServiceModel.getId(), convertMerchandiseServiceModel.getId());
         Assertions.assertEquals(testMerchandiseServiceModel.getImageUrl(), testMerchandise.getImageUrl());
         Assertions.assertEquals(testMerchandiseServiceModel.getCategory(), testMerchandise.getCategory());
         Assertions.assertEquals(testMerchandiseServiceModel.getPrice(), testMerchandise.getPrice());
@@ -77,12 +85,6 @@ public class MerchandiseServiceImplTest {
     @Test
     public void findAllOrderByReleaseDateThenByPriceTest() {
 
-        testMerchandise.setId(1L);
-        testMerchandise.setImageUrl(MERCHANDISE_IMAGE_URL);
-        testMerchandise.setCategory(MerchandiseEnum.FIGURES);
-        testMerchandise.setPrice(BigDecimal.valueOf(70));
-        testMerchandise.setProductTitle(MERCHANDISE_TITLE);
-        testMerchandise.setReleaseDate(LocalDate.parse(MERCHANDISE_DATE));
 
         secondTestMerchandise.setId(2L);
         secondTestMerchandise.setImageUrl(MERCHANDISE_IMAGE_URL);
@@ -99,17 +101,17 @@ public class MerchandiseServiceImplTest {
         thirdTestMerchandise.setReleaseDate(LocalDate.parse(MERCHANDISE_DATE));
 
         when(mockMerchandiseRepository.findAllByOrderByReleaseDateDescPriceDesc())
-                .thenReturn(Arrays.asList(secondTestMerchandise,testMerchandise,thirdTestMerchandise));
+                .thenReturn(Arrays.asList(secondTestMerchandise, testMerchandise, thirdTestMerchandise));
 
         List<MerchandiseViewModel> merchandiseViewModels = testMSI.findAllOrderByReleaseDateThenByPrice();
 
-        Assertions.assertEquals(3,merchandiseViewModels.size());
-        Assertions.assertEquals(secondTestMerchandise.getReleaseDate(),merchandiseViewModels.get(0).getReleaseDate());
+        Assertions.assertEquals(3, merchandiseViewModels.size());
+        Assertions.assertEquals(secondTestMerchandise.getReleaseDate(), merchandiseViewModels.get(0).getReleaseDate());
         Assertions.assertEquals(BigDecimal.valueOf(30), merchandiseViewModels.get(2).getPrice());
     }
 
     @Test
-    public void deleteMerchandiseByIdTest(){
+    public void deleteMerchandiseByIdTest() {
         Long id1 = 1L;
         Long id2 = 2L;
         Long id3 = 3L;
@@ -123,13 +125,14 @@ public class MerchandiseServiceImplTest {
         verify(mockMerchandiseRepository, times(1)).deleteById(id3);
     }
 
-    @Test public void findMerchandiseByIdTest(){
+    @Test
+    public void findMerchandiseByIdTest() {
 
         when(mockMerchandiseRepository.findById(1L)).thenReturn(Optional.of(testMerchandise));
 
         secondTestMerchandise = testMSI.findMerchandiseById(1L);
 
-        Assertions.assertEquals(secondTestMerchandise.getPrice(),testMerchandise.getPrice());
+        Assertions.assertEquals(secondTestMerchandise.getPrice(), testMerchandise.getPrice());
         Assertions.assertNotNull(secondTestMerchandise);
     }
 }

@@ -45,6 +45,12 @@ public class NewsServiceImplTest {
         testNSI = new NewsServiceImpl(mockNewsRepository, modelMapper);
 
         newsTest = new News();
+        newsTest.setId(1L);
+        newsTest.setDescription(NEWS_DESCRIPTION);
+        newsTest.setTitle(NEWS_TITLE);
+        newsTest.setImageUrl(NEWS_IMAGE_URL);
+        newsTest.setFromDate(LocalDate.parse(NEWS_DATE));
+
         secondNewsTest = new News();
         thirdNewsTest = new News();
     }
@@ -72,11 +78,6 @@ public class NewsServiceImplTest {
 
     @Test
     public void findAllNewsSortByReleaseDateDescTest() {
-        newsTest.setId(1L);
-        newsTest.setDescription(NEWS_DESCRIPTION);
-        newsTest.setTitle(NEWS_TITLE);
-        newsTest.setImageUrl(NEWS_IMAGE_URL);
-        newsTest.setFromDate(LocalDate.parse(NEWS_DATE));
 
         secondNewsTest.setId(2L);
         secondNewsTest.setDescription(NEWS_DESCRIPTION);
@@ -98,12 +99,12 @@ public class NewsServiceImplTest {
         Assertions.assertFalse(newsViewModelsTest.isEmpty());
         Assertions.assertEquals(secondNewsTest.getFromDate(), newsViewModelsTest.get(0).getFromDate());
     }
+
     @Test
     public void testDeleteById() {
         Long id1 = 1L;
         Long id2 = 2L;
         Long id3 = 3L;
-
 
 
         testNSI.deleteById(id1);

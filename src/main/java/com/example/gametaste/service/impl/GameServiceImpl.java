@@ -34,7 +34,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public List<GamesViewModel> findAllGamesSortByPriceDescending() {
+    public List<GamesViewModel> findAllGamesSortByReleaseDateThenByPriceThenByGameSizeDesc() {
        return gameRepository.findAllByOrderByReleaseDateDescPriceDescGameSizeDesc()
                .stream()
                .map(game -> modelMapper.map(game, GamesViewModel.class))

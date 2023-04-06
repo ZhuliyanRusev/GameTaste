@@ -9,7 +9,7 @@ import java.util.List;
 public interface GameService {
     GameServiceModel addGame(GameServiceModel gameServiceModel);
 
-    List<GamesViewModel> findAllGamesSortByPriceDescending();
+    List<GamesViewModel> findAllGamesSortByReleaseDateThenByPriceThenByGameSizeDesc();
 
     void deleteGameById(Long id);
 
