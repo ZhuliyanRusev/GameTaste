@@ -63,7 +63,7 @@ public class NewsController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteGame(@PathVariable Long id) {
+    public String deleteNews(@PathVariable Long id) {
         newsService.deleteById(id);
 
         return "redirect:/news";
