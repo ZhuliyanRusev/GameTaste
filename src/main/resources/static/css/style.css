@@ -388,3 +388,30 @@ hr {
     text-align: center;
     color: white;
 }
+.form-label-group { /*  тук задавам позицията на "relative", което прави лейбъла в съотношение с бащиния елемент. */
+    position: relative;
+}
+
+.form-label-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: text;
+    opacity: 0.5;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: all 0.2s;
+    transform-origin: top left;
+}
+
+.form-label-group input:focus ~ label,
+.form-label-group input:not(:placeholder-shown) ~ label {   /*тези класове са отговорни за анимирането на form-label, когато  input полето получи focus*/
+    opacity: 1;
+    transform: translate3d(0, -1.5rem, 0) scale(0.8);
+}
+
+.form-label-group.active label { /* отговорно за поддръжката на label да бъде във "движещо" състояние, когато Input полето има съдържание в него. */
+    opacity: 1;
+    transform: translate3d(0, -1.5rem, 0) scale(0.8);
+}

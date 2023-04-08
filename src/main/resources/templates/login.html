@@ -15,25 +15,54 @@
       <br/>
     </th:block>
 
-
     <div class="form-group">
       <div class="label-holder text-white d-flex justify-content-center">
         <label for="username" class="h3 mb-2">Username</label>
       </div>
-      <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" id="username" name="username" placeholder="Username"/>
+      <div class="form-label-group">
+        <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" id="username" name="username" placeholder=" " />
+        <label for="username">Username</label>
+      </div>
     </div>
 
     <div class="form-group">
       <div class="label-holder text-white d-flex justify-content-center">
         <label for="password" class="h3 mb-2">Password</label>
       </div>
-      <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+      <div class="form-label-group">
+        <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control" id="password" name="password" placeholder=" " />
+        <label for="password">Password</label>
+      </div>
     </div>
 
     <div class="button-holder d-flex justify-content-center">
       <button type="submit" class="btn btn-light  mb-3 bg-info">Login</button>
     </div>
+<!--    Първо избирам всички полета за въвеждане във формуляра с помощта на метода querySelectorAll и-->
+<!--    ги присвоявам на inputs.-->
 
+<!--    След това inputs преминава през всяко поле за въвеждане и добавя два слушателя на събития - един,-->
+<!--    когато полето за въвеждане е на фокус и един, когато полето за въвеждане-->
+<!--    загуби фокус (когато потребителят щракне или изведе раздела на полето).-->
+
+<!--    Когато полето за въвеждане е на focus, кодът получава етикетния елемент, който е до полето за въвеждане,-->
+<!--    и добавя active класа към него. Този клас се използва за стилизиране на етикета, когато полето за въвеждане се използва.-->
+    <script>
+      const inputs = document.querySelectorAll('.form-label-group input');
+
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          const label = input.nextElementSibling;
+          label.classList.add('active');
+        });
+        input.addEventListener('blur', () => {
+          if (input.value === '') {
+            const label = input.nextElementSibling;
+            label.classList.remove('active');
+          }
+        });
+      });
+    </script>
   </form>
 </main>
 <footer th:replace="~{commons/fragments::footer}"></footer>

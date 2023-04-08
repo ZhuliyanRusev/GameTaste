@@ -10,6 +10,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<!--  Функцията scrollFunction() се задейства всеки път, когато потребителят превърта страницата.-->
+<!--  После проверявам текущата позиция на лентата за превъртане с помощта на document.body.scrollTop и document.documentElement.scrollTop. -->
+<!--  Ако позицията на превъртане е по-голяма от 20, се настройва свойството за показване на бутона.-->
+<!--  В противен случай  задавам свойството за показване на "none", за да се скрие стрелката.-->
+<!--  Втората topFunction() се извиква, когато потребителят щракне върху бутона.-->
+<!--  Вътре използвам window.scroll() за плавно превъртане на страницата обратно до върха, като свойството за поведение съм го задал на „smooth“.-->
   <script>
     window.onscroll = function() {scrollFunction()};
 
