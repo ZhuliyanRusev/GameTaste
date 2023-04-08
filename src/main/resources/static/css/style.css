@@ -301,14 +301,17 @@ hr {
 
 .your-games-header,
 .your-merchandises-header {
-    margin-right: 700px;
-    margin-left: 700px;
+    padding: 5px 10px;
     margin-top: 40px;
-    color: white;
     border-radius: 15px;
+    color: white;
     font-family: cursive;
     background-color: rgba(25, 199, 199, 0.84) !important;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
 }
+
 .item-count {
     display: inline-block;
     border-radius: 50%;
@@ -322,8 +325,7 @@ hr {
     margin-left: 0.2em;
 }
 .buy-all-items-button{
-    margin-right: 640px;
-    margin-left: 640px;
+    margin: 0 auto;
     font-family: cursive;
     background-color: #F44336;
     color: #FFFFFF !important;

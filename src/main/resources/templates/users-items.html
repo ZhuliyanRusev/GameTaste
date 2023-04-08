@@ -77,7 +77,7 @@
             <th:block th:if="${userGamesSet.size() != 0}">
                 <h2 class="your-games-header text-center">Your Games</h2>
                 <hr>
-                <a class="buy-all-items-button"  th:text="|Buy all games for *{allGamesPrice}$|"></a>
+                <button class="buy-all-items-button"  th:text="|Buy all games for *{allGamesPrice}$|"></button>
             </th:block>
         </div>
     </div>
@@ -97,11 +97,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <th:block th:if="${userMerchandisesSet.size() != 0}">
                 <h2 class="your-merchandises-header text-center">Your Merchandise</h2>
                 <hr>
-                <a class="buy-all-items-button"  th:text="|Buy all merchandises for *{allMerchandisesPrice}$|"></a>
+                <button class="buy-all-items-button"  th:text="|Buy all merchandises for *{allMerchandisesPrice}$|"></button>
             </th:block>
         </div>
     </div>
